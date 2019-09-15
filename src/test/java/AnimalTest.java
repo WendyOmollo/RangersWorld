@@ -23,4 +23,10 @@ public class AnimalTest{
         Animal animal = setUpNewAnimal();
         assertTrue(animal instanceof Animal);
     }
+//
+    @Test
+    public void addAnimal_getId(){
+        Animal animal = setUpNewAnimal();
+        assertEquals(1,animal.getId());
+    }
 }
