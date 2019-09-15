@@ -21,4 +21,33 @@ public class Sql2oAnimalDaoTest{
     public void tearDown() throws Exception {
         conn.close();
     }
+
+    public Animal setUpNewAnimal(){
+        return new Animal(1,"Tiger");
+    }
+
+    @Test
+    public void addingAnimalSetsId() throws Exception{
+        Animal animal = setUpNewAnimal();
+        int originalAnimalId = animal.getId();
+        animalDao.add(animal);
+        assertNotEquals(originalAnimalId,animal.getId());
+    }
+    @Test
+    public void existingAnimalsCanBeFoundById() throws Exception{
+        Animal animal = setUpNewAnimal();
+        animalDao.add(animal);
+        Animal foundAnimal = animalDao.findById(animal.getId());
+        assertEquals(animal,foundAnimal);
+    }
+    @Test
+    public void addedAnimalsAreReturnedFromgetAll() throws Exception {
+        Animal animal = setUpNewAnimal();
+        animalDao.add(animal);
+        assertEquals(1, animalDao.getAll().size());
+    }
+    @Test
+    public void noAnimalsReturnsEmptyList() throws Exception {
+        assertEquals(0, animalDao.getAll().size());
+    }
 }
