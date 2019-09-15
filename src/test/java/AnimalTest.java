@@ -15,6 +15,9 @@ public class AnimalTest{
     public void tearDown() throws Exception {
 
     }
+    public Animal setUpNewAnimal(){
+        return new Animal(1,"Tiger");
+    }
     @Test
     public void addAnimal_true(){
         Animal animal = setUpNewAnimal();
