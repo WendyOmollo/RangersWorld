@@ -41,7 +41,7 @@ public class Sql2oAnimalDaoTest{
         assertEquals(animal,foundAnimal);
     }
     @Test
-    public void addedAnimalsAreReturnedFromgetAll() throws Exception {
+    public void addedAnimalsAreReturnedFromGetAll() throws Exception {
         Animal animal = setUpNewAnimal();
         animalDao.add(animal);
         assertEquals(1, animalDao.getAll().size());
