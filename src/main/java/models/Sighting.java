@@ -1,5 +1,8 @@
 package models;
 
+import org.sql2o.Connection;
+
+import java.util.List;
 import java.util.Objects;
 
 public class Sighting {
@@ -63,4 +66,22 @@ public class Sighting {
     public int hashCode() {
         return Objects.hash(getId(), getLocation(), getRanger_name(), getAnimal_id());
     }
+
+    public void save(){
+        try(Connection con = DB.sql2o.open()) {
+            String sql = "INSERT INTO sightings (location,ranger_name,animal_id) VALUES (:location, :ranger_name,:animal:id)";
+            con.createQuery(sql)
+                    .addParameter("location", location)
+                    .addParameter("ranger_name", ranger_name)
+                    .addParameter("animal_id",animal_id)
+                    .executeUpdate();
+        }
+    }
+    public static List<Sighting> all() {
+        String sql = "SELECT * FROM sightings";
+        try(Connection con = DB.sql2o.open()) {
+            return con.createQuery(sql).executeAndFetch(Sighting.class);
+        }
+    }
+
 }

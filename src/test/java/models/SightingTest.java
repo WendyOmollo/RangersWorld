@@ -21,6 +21,9 @@ public class SightingTest {
     public Sighting setUpNewSighting(){
         return new Sighting("At the river bank","Lulu Hassan",1);
     }
+    public Sighting setUpAnotherSighting(){
+        return new Sighting("At the pond","Maria Kalu",2);
+    }
 
     @Test
     public void addSighting_getsInstanceOfSighting(){
@@ -41,6 +44,15 @@ public class SightingTest {
     public void addSighting_getAnimalId(){
         Sighting sighting = setUpNewSighting();
         assertEquals(1,sighting.getAnimal_id());
+    }
+    @Test
+    public void addSighting_getAllInstancesOfSightings(){
+        Sighting sighting = setUpNewSighting();
+        sighting.save();
+        Sighting anotherSighting = setUpAnotherSighting();
+        anotherSighting.save();
+        assertEquals(true,Sighting.all().get(0).equals(sighting));
+        assertEquals(true,Sighting.all().get(1).equals(anotherSighting));
     }
 
 }
