@@ -5,12 +5,12 @@ import java.util.List;
 
 import java.util.Objects;
 
-public class Animal {
+public  class Animal {
 
     private int id;
     private String name;
     private String type;
-    private static final String ANIMAL_TYPE ="thriving";
+    public static final String ANIMAL_TYPE ="thriving";
 
     public Animal(int id,String name){
         this.id = id;

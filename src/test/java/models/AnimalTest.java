@@ -91,7 +91,8 @@ public class AnimalTest{
     @Test
     public void animal_instantiatesWithType_(){
         Animal animal = setUpAnotherAnimal();
-        assertEquals("thriving",animal.getType());
+        assertEquals(animal.getType(),(Animal.ANIMAL_TYPE));
     }
+
 
 }
