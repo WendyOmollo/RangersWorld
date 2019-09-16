@@ -38,7 +38,7 @@ public class AnimalTest{
         assertEquals("Tiger",animal.getName());
     }
     @Test
-    public void equals_returnsTrueIfNameAndEmailAreSame_true() {
+    public void equals_returnsTrueIfFirstAnimalAndSecondAnimalAreSame_true() {
         Animal firstAnimal = setUpNewAnimal();
         Animal anotherAnimal = setUpNewAnimal();
         assertTrue(firstAnimal.equals(anotherAnimal));
