@@ -1,4 +1,4 @@
-import dao.Sql2oAnimalDao;
+
 
 import models.*;
 
@@ -20,8 +20,8 @@ public class App {
 
         staticFileLocation("/public");
         String connectionString = "jdbc:h2:~/Animal.db;INIT=RUNSCRIPT from 'classpath:db/create.sql'";
-        Sql2o sql2o = new Sql2o(connectionString, "", "");
-        Sql2oAnimalDao animalDao = new Sql2oAnimalDao(sql2o);
+        Sql2o sql2o = new Sql2o(connectionString, "lllll", "");
+
         Map<String, Object> model = new HashMap<>();
 
         get("/",(request, response) -> {

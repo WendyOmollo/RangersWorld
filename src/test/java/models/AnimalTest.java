@@ -12,6 +12,7 @@ import static org.junit.Assert.*;
 public class AnimalTest{
     @Rule
     public  DatabaseRule database = new DatabaseRule();
+
     @Before
     public void setUp() throws Exception {
 
@@ -30,7 +31,7 @@ public class AnimalTest{
         Animal animal = setUpNewAnimal();
         assertTrue(animal instanceof Animal);
     }
-//
+
     @Test
     public void addAnimal_getId(){
         Animal animal = setUpNewAnimal();
