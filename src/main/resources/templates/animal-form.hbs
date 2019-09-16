@@ -9,6 +9,10 @@
                             <label for="name"class="text-white" >Name</label>
                         </div>
                         <div class="md-form w-50">
+                            <input id="type" name="type" type="text-white" length="5" class="form-control">
+                            <label for="type"class="text-white" >Type</label>
+                        </div>
+                        <div class="md-form w-50">
                             <select id="domain_id" name="domain_id" type="text" length="5" class="form-control">
                                 {{#each sighting}}
                                     <option value="{{id}}" class="text-white">{{name}}</option>
@@ -16,8 +20,13 @@
                             </select>
                             <label for="domain_id" class="text-white">Sighting</label>
                         </div>
-                        <button type="submit" class="btn btn-secondary" >Go!</button>
+                        <button type="submit" class="btn btn-warning" >Go!</button>
                     </form>
+
+                </div>
+            </div>
+            <div class="container">
+                <div class="col-md-6">
 
                 </div>
             </div>

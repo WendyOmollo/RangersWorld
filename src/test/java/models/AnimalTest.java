@@ -26,6 +26,9 @@ public class AnimalTest{
         return new Animal(1,"Tiger");
     }
     public Animal setUpAnotherAnimal(){return new Animal (2,"Lion");}
+    public Sighting setUpNewSighting(){
+        return new Sighting("At the river bank","Lulu Hassan",1);
+    }
     @Test
     public void addAnimal_true(){
         Animal animal = setUpNewAnimal();
@@ -73,5 +76,14 @@ public class AnimalTest{
         Animal secondAnimal = setUpAnotherAnimal();
         secondAnimal.save();
         assertEquals(Animal.find(secondAnimal.getId()), secondAnimal);
+    }
+    @Test
+    public void save_savesAnimalIdIntoDB_true() {
+        Animal testAnimal = setUpNewAnimal();
+        testAnimal.save();
+        Sighting testSighting = setUpNewSighting();
+        testSighting.saveSighting();
+        Sighting savedSighting = Sighting.find(testSighting.getId());
+        assertEquals(savedSighting.getAnimal_id(), testAnimal.getId());
     }
 }
