@@ -48,11 +48,27 @@ public class SightingTest {
     @Test
     public void addSighting_getAllInstancesOfSightings(){
         Sighting sighting = setUpNewSighting();
-        sighting.save();
+        sighting.saveSighting();
         Sighting anotherSighting = setUpAnotherSighting();
-        anotherSighting.save();
+        anotherSighting.saveSighting();
         assertEquals(true,Sighting.all().get(0).equals(sighting));
         assertEquals(true,Sighting.all().get(1).equals(anotherSighting));
     }
+    @Test
+    public void addSighting_getSightingById(){
+        Sighting sighting = setUpNewSighting();
+        sighting.saveSighting();
+        Sighting anotherSighting = setUpAnotherSighting();
+        anotherSighting.saveSighting();
+        assertEquals(Sighting.find(anotherSighting.getId()), anotherSighting);
+
+    }
+@Test
+public void save_assignsIdToObject() {
+    Sighting sighting = setUpNewSighting();
+    sighting.saveSighting();
+    Sighting savedSighting = Sighting.all().get(0);
+    assertEquals(sighting.getId(), savedSighting.getId());
+}
 
 }

@@ -52,7 +52,6 @@ public class AnimalTest{
     public void all_returnsAllInstancesOfAnimal_true() {
         Animal firstAnimal = setUpNewAnimal();
         firstAnimal.save();
-
         Animal secondAnimal = setUpAnotherAnimal();
         secondAnimal.save();
         assertEquals(true, Animal.all().get(0).equals(firstAnimal));
