@@ -28,6 +28,14 @@ public class App {
             return new ModelAndView(model,"layout.hbs");
         },new HandlebarsTemplateEngine());
 
+        get("/animals",(request, response) -> {
+            return new ModelAndView(model,"index.hbs");
+        },new HandlebarsTemplateEngine());
+
+        get("/form",(request, response) -> {
+            return new ModelAndView(model,"animal-form.hbs");
+        },new HandlebarsTemplateEngine());
+
 
         }
 

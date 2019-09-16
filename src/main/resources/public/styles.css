@@ -4,8 +4,8 @@ background-position:center;
 background-attachment:fixed;
 background-repeat:no-repeat;
 }
-.overlay{
 
+.overlay{
 background-position:center;
 height:550px;
 background-color:black;
@@ -15,4 +15,11 @@ margin-left:50px;
 margin-right:50px;
 margin-top:30px;
 
+}
+#head{
+color:white;
+text-align:center;
+padding-top:90px;
+font-weight:900;
+font-size:65px;
 }

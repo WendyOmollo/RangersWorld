@@ -6,7 +6,7 @@
         <meta name="viewport"
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>{{#block "title"}}Princessa!!{{/block}}</title>
+        <title>{{#block "title"}}Rangers{{/block}}</title>
         <!-- Font Awesome -->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
         <!-- Bootstrap core CSS -->
@@ -18,11 +18,38 @@
     </head>
     <body>
 {{/block}}
+<!--Navbar-->
+<nav class="navbar navbar-expand-lg navbar-light warning-color lighten-5">
+    <div class="collapse navbar-collapse" id="basicExampleNav">
+        <!-- Links -->
+        <ul class="navbar-nav mr-auto">
+
+            <li class="nav-item active">
+                <a class="nav-link" href="/">Home
+                    <span class="sr-only">(current)</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/animals">Animals
+                    <span class="sr-only">(current)</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/form">Report Animal</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Sightings</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<!--/.Navbar-->
 
 {{#block "content"}}
 
 <div class="overlay">
-
+<h1 id="head">Rangers' World</h1>
+    <p class="text-center text-white">In animals we trust</p>
 </div>
 
 

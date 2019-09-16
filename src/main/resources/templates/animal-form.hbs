@@ -1,0 +1,29 @@
+{{#partial "content"}}
+    <div class="overlay">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="container" id="lovely">
+                    <form action="/animals/new" method="POST">
+                        <div class="md-form w-50">
+                            <input id="name" name="name" type="text-white" length="5" class="form-control">
+                            <label for="name"class="text-white" >Name</label>
+                        </div>
+                        <div class="md-form w-50">
+                            <select id="domain_id" name="domain_id" type="text" length="5" class="form-control">
+                                {{#each sighting}}
+                                    <option value="{{id}}" class="text-white">{{name}}</option>
+                                {{/each}}
+                            </select>
+                            <label for="domain_id" class="text-white">Sighting</label>
+                        </div>
+                        <button type="submit" class="btn btn-secondary" >Go!</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+{{/partial}}
+{{>layout.hbs}}
