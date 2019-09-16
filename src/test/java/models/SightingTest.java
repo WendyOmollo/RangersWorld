@@ -27,5 +27,20 @@ public class SightingTest {
         Sighting sighting = setUpNewSighting();
         assertTrue(sighting instanceof Sighting);
     }
+    @Test
+    public void addSighting_getLocation(){
+        Sighting sighting = setUpNewSighting();
+        assertEquals("At the river bank",sighting.getLocation());
+    }
+    @Test
+    public void addSighting_getRangerName(){
+        Sighting sighting = setUpNewSighting();
+        assertEquals("Lulu Hassan",sighting.getRanger_name());
+    }
+    @Test
+    public void addSighting_getAnimalId(){
+        Sighting sighting = setUpNewSighting();
+        assertEquals(1,sighting.getAnimal_id());
+    }
 
 }
