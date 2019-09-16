@@ -78,7 +78,7 @@ public void save_assignsIdToObject() {
     assertEquals(sighting.getId(), savedSighting.getId());
 }
     @Test
-    public void getAnimals_retrievesAllMonstersFromDatabase_monstersList() {
+    public void getAnimals_retrievesAllAnimalsFromDatabase_animalsList() {
         Sighting testSighting = setUpNewSighting();
         testSighting.saveSighting();
         Animal firstAnimal = setUpNewAnimal();

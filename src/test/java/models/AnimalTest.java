@@ -88,5 +88,10 @@ public class AnimalTest{
         Sighting savedSighting = Sighting.find(testSighting.getId());
         assertEquals(savedSighting.getAnimal_id(), testAnimal.getId());
     }
+    @Test
+    public void animal_instantiatesWithType_(){
+        Animal animal = setUpAnotherAnimal();
+        assertEquals("thriving",animal.getType());
+    }
 
 }
