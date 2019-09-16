@@ -84,6 +84,13 @@ public class Sighting {
             return con.createQuery(sql).executeAndFetch(Sighting.class);
         }
     }
+
+    public static List<Animal> getAll() {
+        String sql = "SELECT * FROM animals";
+        try(Connection con = DB.sql2o.open()) {
+            return con.createQuery(sql).executeAndFetch(Animal.class);
+        }
+    }
     public static Sighting find(int id) {
         try(Connection con = DB.sql2o.open()) {
             String sql = "SELECT * FROM sightings where id=:id";

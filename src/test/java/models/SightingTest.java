@@ -5,6 +5,8 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
+import java.util.Arrays;
+
 import static org.junit.Assert.*;
 
 public class SightingTest {
@@ -24,6 +26,11 @@ public class SightingTest {
     public Sighting setUpAnotherSighting(){
         return new Sighting("At the pond","Maria Kalu",2);
     }
+    public Animal setUpNewAnimal(){
+        return new Animal(1,"Tiger");
+    }
+
+    public Animal setUpAnotherAnimal(){return new Animal (2,"Lion");}
 
     @Test
     public void addSighting_getsInstanceOfSighting(){
@@ -70,5 +77,16 @@ public void save_assignsIdToObject() {
     Sighting savedSighting = Sighting.all().get(0);
     assertEquals(sighting.getId(), savedSighting.getId());
 }
+    @Test
+    public void getAnimals_retrievesAllMonstersFromDatabase_monstersList() {
+        Sighting testSighting = setUpNewSighting();
+        testSighting.saveSighting();
+        Animal firstAnimal = setUpNewAnimal();
+        firstAnimal.save();
+        Animal secondAnimal = setUpAnotherAnimal();
+        secondAnimal.save();
+        Animal[] animals = new Animal[] {  firstAnimal, secondAnimal };
+        assertTrue(testSighting.getAll().containsAll(Arrays.asList(animals)));
+    }
 
 }
