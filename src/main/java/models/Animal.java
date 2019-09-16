@@ -1,4 +1,7 @@
 package models;
+import org.sql2o.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import java.util.Objects;
 
@@ -40,5 +43,31 @@ public class Animal {
 
         public void setName(String name) {
             this.name = name;
+        }
+
+    public void save(){
+        try(Connection con = DB.sql2o.open()) {
+            String sql = "INSERT INTO animals (id,name) VALUES (:id, :name)";
+            con.createQuery(sql)
+                    .addParameter("id", id)
+                    .addParameter("name", name)
+                    .executeUpdate();
+            }
+        }
+    public static List<Animal> all() {
+        String sql = "SELECT * FROM animals";
+        try(Connection con = DB.sql2o.open()) {
+            return con.createQuery(sql).executeAndFetch(Animal.class);
+        }
+    }
+
+    public static Animal find(int id) {
+        try(Connection con = DB.sql2o.open()) {
+            String sql = "SELECT * FROM animals where id=:id";
+            Animal person = con.createQuery(sql)
+                    .addParameter("id", id)
+                    .executeAndFetchFirst(Animal.class);
+            return person;
+            }
         }
     }
