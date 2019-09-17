@@ -5,10 +5,17 @@ import java.util.Objects;
 public class EndangeredAnimal extends Animal{
     private String type;
     private int id;
+
         private String name;
         private String health;
         private String age;
+
         public static final String ANIMAL_TYPE = "Endangered";
+        public static final String ANIMAL_ILL = "Ill";
+        public static final String ANIMAL_OKAY = "Okay";
+        public static final String ANIMAL_YOUNG = "Young";
+        public static final String ANIMAL_NEWBORN = "Newborn";
+        public static final String ANIMAL_ADULT = "Adult";
 
 
 
@@ -20,6 +27,25 @@ public class EndangeredAnimal extends Animal{
         this.age = age;
         this.type = ANIMAL_TYPE;
 
+    }
+    public static String getAnimalIll() {
+        return ANIMAL_ILL;
+    }
+
+    public static String getAnimalOkay() {
+        return ANIMAL_OKAY;
+    }
+
+    public static String getAnimalYoung() {
+        return ANIMAL_YOUNG;
+    }
+
+    public static String getAnimalNewborn() {
+        return ANIMAL_NEWBORN;
+    }
+
+    public static String getAnimalAdult() {
+        return ANIMAL_ADULT;
     }
 
     @Override
@@ -58,6 +84,7 @@ public class EndangeredAnimal extends Animal{
 
     public void setHealth(String health) {
         this.health = health;
+
     }
 
     public String getAge() {

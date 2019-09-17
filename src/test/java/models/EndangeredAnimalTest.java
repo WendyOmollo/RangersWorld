@@ -48,4 +48,47 @@ public class EndangeredAnimalTest {
         EndangeredAnimal newEndangered = setUpNewEndangered();
         assertEquals("Young",newEndangered.getAge());
     }
+    @Test
+    public void addEndangeredAnimal_returnsTheSameAnimal(){
+        EndangeredAnimal newEndangered = setUpNewEndangered();
+        EndangeredAnimal anotherEndangered = setUpNewEndangered();
+        assertTrue(newEndangered.equals(anotherEndangered));
+    }
+    @Test
+    public void addEndangeredAnimal_getType(){
+        EndangeredAnimal newEndangered = setUpNewEndangered();
+        assertEquals(newEndangered.getType(),(EndangeredAnimal.ANIMAL_TYPE));
+
+    }
+    @Test
+    public void addEndangeredAnimal_getIll(){
+        EndangeredAnimal newEndangered = setUpNewEndangered();
+        assertEquals(newEndangered.getAnimalIll(),EndangeredAnimal.ANIMAL_ILL);
+    }
+
+    @Test
+    public void addEndangeredAnimal_getOkay(){
+        EndangeredAnimal newEndangered = setUpNewEndangered();
+        assertEquals(newEndangered.getAnimalOkay(),EndangeredAnimal.ANIMAL_OKAY);
+    }
+    @Test
+    public void addEndangeredAnimal_getYoung(){
+        EndangeredAnimal newEndangered = setUpNewEndangered();
+        assertEquals(newEndangered.getAnimalYoung(),EndangeredAnimal.ANIMAL_YOUNG);
+    }
+    @Test
+    public void addEndangeredAnimal_getAdult(){
+        EndangeredAnimal newEndangered = setUpNewEndangered();
+        assertEquals(newEndangered.getAnimalAdult(),EndangeredAnimal.ANIMAL_ADULT);
+    }
+    @Test
+    public void addEndangeredAnimal_getNewborn(){
+        EndangeredAnimal newEndangered = setUpNewEndangered();
+        assertEquals(newEndangered.getAnimalNewborn(),EndangeredAnimal.ANIMAL_NEWBORN);
+    }
+//    @Test
+//    public void addEndangeredAnimal_getOkay(){
+//        EndangeredAnimal newEndangered = setUpNewEndangered();
+//        assertEquals(newEndangered.getAnimalOkay(),EndangeredAnimal.ANIMAL_OKAY);
+//    }
 }
