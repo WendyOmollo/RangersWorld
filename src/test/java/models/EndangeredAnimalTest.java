@@ -20,12 +20,32 @@ public class EndangeredAnimalTest {
     public  DatabaseRule database = new DatabaseRule();
 
     public EndangeredAnimal setUpNewEndangered(){
-        return new EndangeredAnimal(1,"Rhino","Okay","young");
+        return new EndangeredAnimal(1,"Rhino","Okay","Young");
     }
 
     @Test
     public void addEndangeredAnimal_true(){
-        EndangeredAnimal weak = setUpNewEndangered();
-        assertTrue(weak instanceof EndangeredAnimal);
+        EndangeredAnimal newEndangered = setUpNewEndangered();
+        assertTrue(newEndangered instanceof EndangeredAnimal);
+    }
+    @Test
+    public void addEndangeredAnimal_getId(){
+        EndangeredAnimal newEndangered = setUpNewEndangered();
+        assertEquals(1,newEndangered.getId());
+    }
+    @Test
+    public void addEndangeredAnimal_getName(){
+        EndangeredAnimal newEndangered = setUpNewEndangered();
+        assertEquals("Rhino",newEndangered.getName());
+    }
+    @Test
+    public void addEndangeredAnimal_getHealth(){
+        EndangeredAnimal newEndangered = setUpNewEndangered();
+        assertEquals("Okay",newEndangered.getHealth());
+    }
+    @Test
+    public void addEndangeredAnimal_getAge(){
+        EndangeredAnimal newEndangered = setUpNewEndangered();
+        assertEquals("Young",newEndangered.getAge());
     }
 }
