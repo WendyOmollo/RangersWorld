@@ -22,6 +22,9 @@ public class EndangeredAnimalTest {
     public EndangeredAnimal setUpNewEndangered(){
         return new EndangeredAnimal(1,"Rhino","Okay","Young");
     }
+    public Sighting setUpNewSighting(){
+        return new Sighting("At the river bank","Lulu Hassan",1);
+    }
 
     @Test
     public void addEndangeredAnimal_true(){
@@ -109,12 +112,21 @@ public class EndangeredAnimalTest {
         assertEquals(newEndangered.getId(), savedEndangered.getId());
     }
     @Test
-    public void find_returnsAnimalWithSameId_secondAnimal() {
+    public void find_returnsEndangeredAnimalWithSameId_secondAnimal() {
         EndangeredAnimal firstAnimal = setUpNewEndangered();
         firstAnimal.save();
         EndangeredAnimal secondAnimal = new EndangeredAnimal(2,"Elephant","Okay","Adult");
         secondAnimal.save();
         assertEquals(EndangeredAnimal.find(secondAnimal.getId()), secondAnimal);
+    }
+    @Test
+    public void save_savesEndangeredAnimalIdIntoDB_true() {
+        EndangeredAnimal testAnimal = setUpNewEndangered();
+        testAnimal.save();
+        Sighting testSighting = setUpNewSighting();
+        testSighting.saveSighting();
+        Sighting savedSighting = Sighting.find(testSighting.getId());
+        assertEquals(savedSighting.getAnimal_id(), testAnimal.getId());
     }
 
 }

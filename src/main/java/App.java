@@ -19,10 +19,10 @@ public class App {
     public static void main(String[] args) {
 
         staticFileLocation("/public");
-        String connectionString = "jdbc:h2:~/Animal.db;INIT=RUNSCRIPT from 'classpath:db/create.sql'";
-        Sql2o sql2o = new Sql2o(connectionString, "lllll", "");
-
+        String connectionString = "jdbc:postgresql://localhost:5432/animal_wild;INIT=RUNSCRIPT from 'classpath:DB'";
+        Sql2o sql2o = new Sql2o(connectionString, "moringa", "hyperloop");
         Map<String, Object> model = new HashMap<>();
+
 
         get("/",(request, response) -> {
             return new ModelAndView(model,"layout.hbs");
