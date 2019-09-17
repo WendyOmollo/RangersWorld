@@ -86,9 +86,27 @@ public class EndangeredAnimalTest {
         EndangeredAnimal newEndangered = setUpNewEndangered();
         assertEquals(newEndangered.getAnimalNewborn(),EndangeredAnimal.ANIMAL_NEWBORN);
     }
-//    @Test
-//    public void addEndangeredAnimal_getOkay(){
-//        EndangeredAnimal newEndangered = setUpNewEndangered();
-//        assertEquals(newEndangered.getAnimalOkay(),EndangeredAnimal.ANIMAL_OKAY);
-//    }
+    @Test
+    public void addEndangeredAnimal_saveEndangeredAnimal(){
+        EndangeredAnimal newEndangered = setUpNewEndangered();
+        newEndangered.save();
+        assertEquals(true,EndangeredAnimal.allEndangered().get(0).equals(newEndangered));
+    }
+    @Test
+    public void addEndangeredAnimal_getAllInstancesAOfAnimal(){
+        EndangeredAnimal newEndangered = setUpNewEndangered();
+        newEndangered.save();
+        EndangeredAnimal anotherEndangered = new EndangeredAnimal(2,"Elephant","Okay","Adult");
+        anotherEndangered.save();
+        assertEquals(true,EndangeredAnimal.allEndangered().get(0).equals(newEndangered));
+        assertEquals(true,EndangeredAnimal.allEndangered().get(1).equals(anotherEndangered));
+    }
+    @Test
+    public void save_assignsIdToObject() {
+        EndangeredAnimal newEndangered = setUpNewEndangered();
+        newEndangered.save();
+        EndangeredAnimal savedEndangered = EndangeredAnimal.allEndangered().get(0);
+        assertEquals(newEndangered.getId(), savedEndangered.getId());
+    }
+
 }

@@ -1,12 +1,16 @@
 package models;
 
+import org.sql2o.Connection;
+
+import java.util.List;
 import java.util.Objects;
 
 public class EndangeredAnimal extends Animal{
+
     private String type;
     private int id;
 
-        private String name;
+        private static String name;
         private String health;
         private String age;
 
@@ -99,17 +103,29 @@ public class EndangeredAnimal extends Animal{
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
         EndangeredAnimal that = (EndangeredAnimal) o;
-        return getId() == that.getId() &&
-                Objects.equals(getType(), that.getType()) &&
-                Objects.equals(getName(), that.getName()) &&
-                Objects.equals(getHealth(), that.getHealth()) &&
-                Objects.equals(getAge(), that.getAge());
+        return (this.name.equals(EndangeredAnimal.name));
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), getType(), getId(), getName(), getHealth(), getAge());
+    }
+    public void save(){
+        try(Connection con = DB.sql2o.open()) {
+            String sql = "INSERT INTO endangered_animals (id,name,health,age) VALUES (:id, :name,:health,:age)";
+            con.createQuery(sql)
+                    .addParameter("id", id)
+                    .addParameter("name", name)
+                    .addParameter("health",health)
+                    .addParameter("age",age)
+                    .executeUpdate();
+        }
+    }
+    public static List<EndangeredAnimal> allEndangered() {
+        String sql = "SELECT * FROM endangered_animals";
+        try(Connection con = DB.sql2o.open()) {
+            return con.createQuery(sql).executeAndFetch(EndangeredAnimal.class);
+        }
     }
 }
