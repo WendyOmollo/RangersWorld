@@ -27,7 +27,7 @@ public class EndangeredAnimalTest {
     public  DatabaseRule database = new DatabaseRule();
 
     public EndangeredAnimal setUpNewEndangered(){
-        return new EndangeredAnimal(1,"Rhino","Okay","Young");
+        return new EndangeredAnimal("Rhino","Okay","Young",1);
     }
     public Sighting setUpNewSighting(){
         return new Sighting("At the river bank","Lulu Hassan",1);
@@ -41,6 +41,7 @@ public class EndangeredAnimalTest {
     @Test
     public void addEndangeredAnimal_getId(){
         EndangeredAnimal newEndangered = setUpNewEndangered();
+
         assertEquals(1,newEndangered.getId());
     }
     @Test
@@ -107,7 +108,7 @@ public class EndangeredAnimalTest {
     public void addEndangeredAnimal_getAllInstancesAOfAnimal(){
         EndangeredAnimal newEndangered = setUpNewEndangered();
         newEndangered.save();
-        EndangeredAnimal anotherEndangered = new EndangeredAnimal(2,"Tiger","Ill","Newborn");
+        EndangeredAnimal anotherEndangered = new EndangeredAnimal("Tiger","Ill","Newborn",2);
         anotherEndangered.save();
         assertEquals(true,EndangeredAnimal.allEndangered().get(0).equals(newEndangered));
         assertEquals(true,EndangeredAnimal.allEndangered().get(1).equals(anotherEndangered));
@@ -123,7 +124,7 @@ public class EndangeredAnimalTest {
     public void find_returnsEndangeredAnimalWithSameId_secondAnimal() {
         EndangeredAnimal firstAnimal = setUpNewEndangered();
         firstAnimal.save();
-        EndangeredAnimal secondAnimal = new EndangeredAnimal(2,"Elephant","Okay","Adult");
+        EndangeredAnimal secondAnimal = new EndangeredAnimal("Elephant","Okay","Adult",3);
         secondAnimal.save();
         assertEquals(EndangeredAnimal.find(secondAnimal.getId()), secondAnimal);
     }

@@ -8,14 +8,10 @@ import java.util.Objects;
 
 import static models.DB.sql2o;
 
-public class EndangeredAnimal extends Animal{
-
-    private String type;
-    private int id;
-
-        private static String name;
+public class EndangeredAnimal extends Animal {
         private String health;
         private String age;
+        private int id;
 
         public static final String ANIMAL_TYPE = "Endangered";
         public static final String ANIMAL_ILL = "Ill";
@@ -26,14 +22,13 @@ public class EndangeredAnimal extends Animal{
 
 
 
-    public EndangeredAnimal(int id, String name,String health,String age) {
-        super(name);
-        this.id =id;
-        this.name = name;
+    public EndangeredAnimal( String animalName,String health,String age,int id) {
+        super(animalName);
+        this.animalName = animalName;
         this.health = health;
         this.age = age;
         this.type = ANIMAL_TYPE;
-
+        this.id =id;
     }
     public static String getAnimalIll() {
         return ANIMAL_ILL;
@@ -77,16 +72,6 @@ public class EndangeredAnimal extends Animal{
         this.id = id;
     }
 
-    @Override
-    public String getName() {
-        return name;
-    }
-
-    @Override
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getHealth() {
         return health;
     }
@@ -109,7 +94,7 @@ public class EndangeredAnimal extends Animal{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         EndangeredAnimal animal = (EndangeredAnimal) o;
-        return (this.name.equals(EndangeredAnimal.name));
+        return (this.animalName.equals(animal.animalName));
     }
 
     @Override
@@ -118,12 +103,12 @@ public class EndangeredAnimal extends Animal{
     }
     public void save(){
         try(Connection con = DB.sql2o.open()) {
-            String sql = "INSERT INTO endangered_animals (id,name,health,age) VALUES (:id,:name,:health,:age)";
+            String sql = "INSERT INTO endangered_animals (name,health,age,type) VALUES (:name,:health,:age,:type)";
            this.id=(int) con.createQuery(sql,true)
-                    .addParameter("id", id)
-                    .addParameter("name", name)
+                    .addParameter("name", animalName)
                     .addParameter("health",health)
                     .addParameter("age",age)
+                    .addParameter("type",type)
                     .executeUpdate()
                     .getKey();
         }

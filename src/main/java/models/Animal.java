@@ -17,14 +17,12 @@ public  class Animal {
 
     public Animal( String animalName){
         this.id = id;
-
         this.animalName = animalName;
         this.type = ANIMAL_TYPE;
         }
 
-        public Animal(String animalName,int id){
+    public Animal(String animalName,int id){
             this.id = id;
-
             this.animalName = animalName;
 
         }
@@ -73,9 +71,10 @@ public  class Animal {
 
     public void save(){
         try(Connection con = DB.sql2o.open()) {
-            String sql = "INSERT INTO animals (name) VALUES (:name)";
+            String sql = "INSERT INTO animals (name,type) VALUES (:name,:type)";
             this.id = (int) con.createQuery(sql,true)
                     .addParameter("name", animalName)
+                    .addParameter("type",type)
                     .executeUpdate()
                     .getKey();
             }
