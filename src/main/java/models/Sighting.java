@@ -1,6 +1,6 @@
 package models;
 
-import dao.SightingDao;
+
 import org.sql2o.*;
 
 import java.util.List;
@@ -8,7 +8,8 @@ import java.util.Objects;
 
 import static models.DB.sql2o;
 
-public class Sighting implements SightingDao {
+public class Sighting  {
+
 
     private int id;
     private String location;
@@ -77,7 +78,7 @@ public class Sighting implements SightingDao {
     }
 
 
-    public    List<Sighting> getAll() {
+    public static List<Sighting> getAll() {
         try(Connection con = sql2o.open()){
             return con.createQuery("SELECT * FROM sightings") //raw sql
                     .executeAndFetch(Sighting.class); //fetch a list
@@ -85,15 +86,21 @@ public class Sighting implements SightingDao {
 
     }
 
-//    public static List<Animal> getAll() {
-//        String sql = "SELECT * FROM animals";
-//        try(Connection con = sql2o.open()) {
-//            return con.createQuery(sql).executeAndFetch(Animal.class);
-//        }
-//    }
+    public static List<Animal> getAnimals() {
+        String sql = "SELECT * FROM animals";
+        try(Connection con = sql2o.open()) {
+            return con.createQuery(sql).executeAndFetch(Animal.class);
+        }
+    }
 
-    @Override
-    public void add(Sighting sighting) {
+    public static List<EndangeredAnimal> allEndangered() {
+        String sql = "SELECT * FROM endangered_animals";
+        try(Connection con = sql2o.open()) {
+            return con.createQuery(sql).executeAndFetch(EndangeredAnimal.class);
+        }
+    }
+
+    public void add() {
         try(Connection con = sql2o.open()) {
             String sql = "INSERT INTO sightings (location,animal_id,ranger_name,endangered_id) VALUES (:location,:animal_id,:ranger_name,:endangered_id)";
             this.id = (int) con.createQuery(sql,true)
@@ -107,8 +114,8 @@ public class Sighting implements SightingDao {
 
     }
 
-    @Override
-    public  Sighting findById(int id) {
+
+    public static Sighting findById(int id) {
         try(Connection con = sql2o.open()) {
             String sql = "SELECT * FROM sightings where id=:id";
             Sighting sighting = con.createQuery(sql)
@@ -119,7 +126,7 @@ public class Sighting implements SightingDao {
 
     }
 
-    @Override
+
     public void deleteById(int id) {
         try(Connection con = sql2o.open()) {
             String sql = "DELETE * FROM sightings where id=:id";
@@ -132,8 +139,8 @@ public class Sighting implements SightingDao {
 
     }
 
-    @Override
-    public  void clearAllSightings() {
+
+    public static void clearAllSightings() {
         try (Connection con = sql2o.open()) {
             String sql = "DELETE from sightings";
             con.createQuery(sql)
@@ -143,13 +150,5 @@ public class Sighting implements SightingDao {
         }
 
     }
-
-
-//    public static List<EndangeredAnimal> allEndangered() {
-//        String sql = "SELECT * FROM endangered_animals";
-//        try(Connection con = sql2o.open()) {
-//            return con.createQuery(sql).executeAndFetch(EndangeredAnimal.class);
-//        }
-//    }
 
 }

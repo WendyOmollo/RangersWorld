@@ -1,6 +1,6 @@
 
 
-import dao.SightingDao;
+
 import models.*;
 
 import java.lang.reflect.Array;
@@ -47,7 +47,7 @@ public class App {
             Animal animal = new Animal(animalName);
             animal.save();
             Sighting sighting = new Sighting(animalSighting,animalRanger,1);
-            sighting.add(sighting);
+            sighting.add();
             model.put("name",animalName);
             model.put("sighting",animalSighting);
             model.put("ranger_name",animalRanger);
