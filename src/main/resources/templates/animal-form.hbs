@@ -3,30 +3,47 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="container" id="lovely">
-                    <form action="/animals/new" method="POST">
+                    <h4 class="text-white">Add animal</h4>
+                    <form action="/form" method="POST">
                         <div class="md-form w-50">
-                            <input id="name" name="name" type="text-white" length="5" class="form-control">
+                            <input id="name" name="name" type="text-white" length="5" class="form-control" placeholder="Name">
+                        </div>
+                        <div class="md-form w-50">
+                            <select id="location" name="location" type="text" length="5" class="form-control">
+                                <option value="river">River Bank</option>
+                                <option value="pond">At the pond</option>
+                                <option value="quicksand">At the quick sands</option>
+                                <option value="clearing">At the clearing</option>
+                                <option value="waterfall">At the waterfall</option>
+                            </select>
+                        </div>
+                        <div class="md-form w-50">
+                            <input id="ranger_name" name="ranger_name" type="text-white" length="5" class="form-control" placeholder="Ranger">
+                        </div>
+                     <button type="submit" class="btn btn-warning" >Go!</button>
+                    </form>
+                </div>
+            </div>
+
+                <div class="col-md-6">
+                    <div class="container">
+                    <h4 class="text-white">Add endangered animal</h4>
+                    <form>
+                        <div class="md-form w-50">
+                            <input id="name" name="name" type="text-white" length="5" class="form-control" placeholder="Name">
                             <label for="name"class="text-white" >Name</label>
                         </div>
                         <div class="md-form w-50">
-                            <input id="type" name="type" type="text-white" length="5" class="form-control">
-                            <label for="type"class="text-white" >Type</label>
-                        </div>
-                        <div class="md-form w-50">
-                            <select id="domain_id" name="domain_id" type="text" length="5" class="form-control">
-                                {{#each sighting}}
-                                    <option value="{{id}}" class="text-white">{{name}}</option>
-                                {{/each}}
+                            <select id="name" name="name" type="text-white" length="5" class="form-control" placeholder="Sighting">
+                                <option value="1">River Bank</option>
+                                <option value="">At the pond</option>
+                                <option value="">At the quick sands</option>
+                                <option value="">At the clearing</option>
+                                <option value="">At the waterfall</option>
                             </select>
-                            <label for="domain_id" class="text-white">Sighting</label>
                         </div>
                         <button type="submit" class="btn btn-warning" >Go!</button>
                     </form>
-
-                </div>
-            </div>
-            <div class="container">
-                <div class="col-md-6">
 
                 </div>
             </div>

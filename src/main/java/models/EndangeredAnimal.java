@@ -1,9 +1,12 @@
 package models;
 
 import org.sql2o.Connection;
+import org.sql2o.Sql2oException;
 
 import java.util.List;
 import java.util.Objects;
+
+import static models.DB.sql2o;
 
 public class EndangeredAnimal extends Animal{
 
@@ -24,7 +27,7 @@ public class EndangeredAnimal extends Animal{
 
 
     public EndangeredAnimal(int id, String name,String health,String age) {
-        super(id, name);
+        super(name);
         this.id =id;
         this.name = name;
         this.health = health;
@@ -51,6 +54,8 @@ public class EndangeredAnimal extends Animal{
     public static String getAnimalAdult() {
         return ANIMAL_ADULT;
     }
+
+
 
     @Override
     public String getType() {
@@ -103,7 +108,7 @@ public class EndangeredAnimal extends Animal{
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        EndangeredAnimal that = (EndangeredAnimal) o;
+        EndangeredAnimal animal = (EndangeredAnimal) o;
         return (this.name.equals(EndangeredAnimal.name));
     }
 
@@ -113,13 +118,14 @@ public class EndangeredAnimal extends Animal{
     }
     public void save(){
         try(Connection con = DB.sql2o.open()) {
-            String sql = "INSERT INTO endangered_animals (id,name,health,age) VALUES (:id, :name,:health,:age)";
-            con.createQuery(sql)
+            String sql = "INSERT INTO endangered_animals (id,name,health,age) VALUES (:id,:name,:health,:age)";
+           this.id=(int) con.createQuery(sql,true)
                     .addParameter("id", id)
                     .addParameter("name", name)
                     .addParameter("health",health)
                     .addParameter("age",age)
-                    .executeUpdate();
+                    .executeUpdate()
+                    .getKey();
         }
     }
     public static List<EndangeredAnimal> allEndangered() {
@@ -134,7 +140,16 @@ public class EndangeredAnimal extends Animal{
             EndangeredAnimal animal = con.createQuery(sql)
                     .addParameter("id", id)
                     .executeAndFetchFirst(EndangeredAnimal.class);
-            return animal;
+                        return animal;
+        }
+    }
+    public static void clearAllEndangered() {
+        String sql = "DELETE from endangered_animals";
+        try (Connection con = sql2o.open()) {
+            con.createQuery(sql)
+                    .executeUpdate();
+        } catch (Sql2oException ex){
+            System.out.println(ex);
         }
     }
 }

@@ -1,20 +1,27 @@
 package models;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.*;
+import org.sql2o.Connection;
+import org.sql2o.Sql2o;
 
 import static org.junit.Assert.*;
 
 public class EndangeredAnimalTest {
+    private static Connection conn;
 
     @Before
     public void setUp() throws Exception {
+        DB.sql2o = new Sql2o("jdbc:postgresql://localhost:5432/animal_wild", "moringa", "hyperloop");
+        conn = DB.sql2o.open();
     }
 
     @After
     public void tearDown() throws Exception {
+        EndangeredAnimal.clearAllEndangered();
+    }
+    @AfterClass
+    public static void shutDown() throws Exception {
+        conn.close();
     }
     @Rule
     public  DatabaseRule database = new DatabaseRule();
@@ -57,6 +64,7 @@ public class EndangeredAnimalTest {
         EndangeredAnimal anotherEndangered = setUpNewEndangered();
         assertTrue(newEndangered.equals(anotherEndangered));
     }
+
     @Test
     public void addEndangeredAnimal_getType(){
         EndangeredAnimal newEndangered = setUpNewEndangered();
@@ -99,7 +107,7 @@ public class EndangeredAnimalTest {
     public void addEndangeredAnimal_getAllInstancesAOfAnimal(){
         EndangeredAnimal newEndangered = setUpNewEndangered();
         newEndangered.save();
-        EndangeredAnimal anotherEndangered = new EndangeredAnimal(2,"Elephant","Okay","Adult");
+        EndangeredAnimal anotherEndangered = new EndangeredAnimal(2,"Tiger","Ill","Newborn");
         anotherEndangered.save();
         assertEquals(true,EndangeredAnimal.allEndangered().get(0).equals(newEndangered));
         assertEquals(true,EndangeredAnimal.allEndangered().get(1).equals(anotherEndangered));
@@ -119,14 +127,14 @@ public class EndangeredAnimalTest {
         secondAnimal.save();
         assertEquals(EndangeredAnimal.find(secondAnimal.getId()), secondAnimal);
     }
-    @Test
-    public void save_savesEndangeredAnimalIdIntoDB_true() {
-        EndangeredAnimal testAnimal = setUpNewEndangered();
-        testAnimal.save();
-        Sighting testSighting = setUpNewSighting();
-        testSighting.saveSighting();
-        Sighting savedSighting = Sighting.find(testSighting.getId());
-        assertEquals(savedSighting.getAnimal_id(), testAnimal.getId());
-    }
+//    @Test
+//    public void save_savesEndangeredAnimalIdIntoDB_true() {
+//        EndangeredAnimal testAnimal = setUpNewEndangered();
+//        testAnimal.save();
+//        Sighting testSighting = setUpNewSighting();
+//        testSighting.saveSighting();
+//        Sighting savedSighting = Sighting.find(testSighting.getEndangered_id());
+//        assertEquals(savedSighting.getEndangered_id(), testAnimal.getId());
+//    }
 
 }

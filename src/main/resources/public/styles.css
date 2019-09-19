@@ -9,7 +9,7 @@ background-repeat:no-repeat;
 background-position:center;
 height:550px;
 background-color:black;
-opacity:0.8;
+opacity:0.75;
 z-index:1;
 margin-left:50px;
 margin-right:50px;
@@ -17,9 +17,15 @@ margin-top:30px;
 
 }
 #head{
-color:white;
 text-align:center;
 padding-top:90px;
 font-weight:900;
 font-size:65px;
 }
+#lovely{
+color:white;
+font-weight:900;
+}
+
+
+

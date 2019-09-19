@@ -1,22 +1,31 @@
 package models;
 
+import dao.SightingDao;
 import org.sql2o.*;
 
 import java.util.List;
 import java.util.Objects;
 
-public class Sighting {
+import static models.DB.sql2o;
+
+public class Sighting implements SightingDao {
 
     private int id;
     private String location;
     private String ranger_name;
     private  int animal_id;
+    private int endangered_id;
 
     public Sighting(String location,String ranger_name,int animal_id){
         this.location = location;
         this.ranger_name = ranger_name;
         this.animal_id = animal_id;
+        this.endangered_id =endangered_id;
         this.id = id;
+    }
+
+    public int getEndangered_id() {
+        return endangered_id;
     }
 
     public int getId() {
@@ -67,38 +76,80 @@ public class Sighting {
         return Objects.hash(getId(), getLocation(), getRanger_name(), getAnimal_id());
     }
 
-    public void saveSighting(){
-        try(Connection con = DB.sql2o.open()) {
-            String sql = "INSERT INTO sightings (location,animal_id,ranger_name) VALUES (:location,:animal_id,:ranger_name)";
+
+    public    List<Sighting> getAll() {
+        try(Connection con = sql2o.open()){
+            return con.createQuery("SELECT * FROM sightings") //raw sql
+                    .executeAndFetch(Sighting.class); //fetch a list
+        }
+
+    }
+
+//    public static List<Animal> getAll() {
+//        String sql = "SELECT * FROM animals";
+//        try(Connection con = sql2o.open()) {
+//            return con.createQuery(sql).executeAndFetch(Animal.class);
+//        }
+//    }
+
+    @Override
+    public void add(Sighting sighting) {
+        try(Connection con = sql2o.open()) {
+            String sql = "INSERT INTO sightings (location,animal_id,ranger_name,endangered_id) VALUES (:location,:animal_id,:ranger_name,:endangered_id)";
             this.id = (int) con.createQuery(sql,true)
                     .addParameter("location", location)
                     .addParameter("animal_id",animal_id)
                     .addParameter("ranger_name", ranger_name)
+                    .addParameter("endangered_id",endangered_id)
                     .executeUpdate()
                     .getKey();
         }
-    }
-    public static List<Sighting> all() {
-        String sql = "SELECT * FROM sightings";
-        try(Connection con = DB.sql2o.open()) {
-            return con.createQuery(sql).executeAndFetch(Sighting.class);
-        }
+
     }
 
-    public static List<Animal> getAll() {
-        String sql = "SELECT * FROM animals";
-        try(Connection con = DB.sql2o.open()) {
-            return con.createQuery(sql).executeAndFetch(Animal.class);
-        }
-    }
-    public static Sighting find(int id) {
-        try(Connection con = DB.sql2o.open()) {
+    @Override
+    public  Sighting findById(int id) {
+        try(Connection con = sql2o.open()) {
             String sql = "SELECT * FROM sightings where id=:id";
             Sighting sighting = con.createQuery(sql)
                     .addParameter("id", id)
                     .executeAndFetchFirst(Sighting.class);
             return sighting;
         }
+
     }
+
+    @Override
+    public void deleteById(int id) {
+        try(Connection con = sql2o.open()) {
+            String sql = "DELETE * FROM sightings where id=:id";
+            Sighting sighting = con.createQuery(sql)
+                    .addParameter("id", id)
+                    .executeAndFetchFirst(Sighting.class);
+        }catch (Sql2oException ex){
+            System.out.println(ex);
+     }
+
+    }
+
+    @Override
+    public  void clearAllSightings() {
+        try (Connection con = sql2o.open()) {
+            String sql = "DELETE from sightings";
+            con.createQuery(sql)
+                    .executeUpdate();
+        } catch (Sql2oException ex){
+            System.out.println(ex);
+        }
+
+    }
+
+
+//    public static List<EndangeredAnimal> allEndangered() {
+//        String sql = "SELECT * FROM endangered_animals";
+//        try(Connection con = sql2o.open()) {
+//            return con.createQuery(sql).executeAndFetch(EndangeredAnimal.class);
+//        }
+//    }
 
 }

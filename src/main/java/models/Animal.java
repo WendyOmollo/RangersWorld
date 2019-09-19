@@ -1,21 +1,32 @@
 package models;
 import org.sql2o.*;
-import java.util.ArrayList;
+
 import java.util.List;
 
 import java.util.Objects;
 
+import static models.DB.sql2o;
+
 public  class Animal {
 
-    private int id;
-    private String name;
-    private String type;
+    public int id;
+    public String animalName;
+    public String type;
+
     public static final String ANIMAL_TYPE ="thriving";
 
-    public Animal(int id,String name){
+    public Animal( String animalName){
         this.id = id;
-        this.name = name;
+
+        this.animalName = animalName;
         this.type = ANIMAL_TYPE;
+        }
+
+        public Animal(String animalName,int id){
+            this.id = id;
+
+            this.animalName = animalName;
+
         }
 
 
@@ -43,11 +54,11 @@ public  class Animal {
         }
 
         public String getName() {
-            return name;
+            return animalName;
         }
 
         public void setName(String name) {
-            this.name = name;
+            this.animalName = name;
         }
 
         public String getType() {
@@ -58,13 +69,15 @@ public  class Animal {
             this.type = type;
         }
 
+
+
     public void save(){
         try(Connection con = DB.sql2o.open()) {
-            String sql = "INSERT INTO animals (id,name) VALUES (:id, :name)";
-            con.createQuery(sql)
-                    .addParameter("id", id)
-                    .addParameter("name", name)
-                    .executeUpdate();
+            String sql = "INSERT INTO animals (name) VALUES (:name)";
+            this.id = (int) con.createQuery(sql,true)
+                    .addParameter("name", animalName)
+                    .executeUpdate()
+                    .getKey();
             }
         }
     public static List<Animal> all() {
@@ -83,4 +96,14 @@ public  class Animal {
             return animal;
             }
         }
+    public static void clearAllAnimals() {
+        String sql = "DELETE from animals";
+        try (Connection con = sql2o.open()) {
+            con.createQuery(sql)
+                    .executeUpdate();
+        } catch (Sql2oException ex){
+            System.out.println(ex);
+        }
     }
+
+}
