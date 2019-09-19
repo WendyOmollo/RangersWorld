@@ -133,7 +133,7 @@ public class EndangeredAnimalTest {
 //        EndangeredAnimal testAnimal = setUpNewEndangered();
 //        testAnimal.save();
 //        Sighting testSighting = setUpNewSighting();
-//        testSighting.saveSighting();
+//        testSighting.add();
 //        Sighting savedSighting = Sighting.find(testSighting.getEndangered_id());
 //        assertEquals(savedSighting.getEndangered_id(), testAnimal.getId());
 //    }

@@ -16,16 +16,15 @@ public  class Animal {
     public static final String ANIMAL_TYPE ="thriving";
 
     public Animal( String animalName){
-        this.id = id;
         this.animalName = animalName;
         this.type = ANIMAL_TYPE;
         }
 
-    public Animal(String animalName,int id){
-            this.id = id;
-            this.animalName = animalName;
-
-        }
+//        public Animal(String animalName,int id){
+//            this.id = id;
+//            this.animalName = animalName;
+//
+//        }
 
 
 
@@ -95,6 +94,16 @@ public  class Animal {
             return animal;
             }
         }
+    public void deleteById(int id) {
+        try(Connection con = sql2o.open()) {
+            String sql = "DELETE * FROM animals where id=:id";
+            Animal animal = con.createQuery(sql)
+                    .addParameter("id", id)
+                    .executeAndFetchFirst(Animal.class);
+        }catch (Sql2oException ex){
+            System.out.println(ex);
+        }
+    }
     public static void clearAllAnimals() {
         String sql = "DELETE from animals";
         try (Connection con = sql2o.open()) {

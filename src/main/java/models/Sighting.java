@@ -25,6 +25,8 @@ public class Sighting  {
         this.id = id;
     }
 
+
+
     public int getEndangered_id() {
         return endangered_id;
     }
@@ -125,7 +127,16 @@ public class Sighting  {
         }
 
     }
+    public static Sighting find(int id) {
+        try (Connection con = sql2o.open()) {
+            String sql = "SELECT * FROM sightings where id=:id";
+            Sighting sighting = con.createQuery(sql)
+                    .addParameter("id", id)
+                    .executeAndFetchFirst(Sighting.class);
+            return sighting;
+        }
 
+    }
 
     public void deleteById(int id) {
         try(Connection con = sql2o.open()) {

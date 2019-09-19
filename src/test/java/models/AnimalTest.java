@@ -29,7 +29,7 @@ public class AnimalTest{
         conn.close();
     }
     public Animal setUpNewAnimal(){
-        return new Animal("Tiger",1);
+        return new Animal("Tiger");
     }
     public Animal setUpAnotherAnimal(){return new Animal ("Lion");}
     public Sighting setUpNewSighting(){
@@ -42,12 +42,6 @@ public class AnimalTest{
     }
 
     @Test
-    public void addAnimal_getId(){
-        Animal animal = setUpNewAnimal();
-        animal.save();
-        assertEquals(1,animal.getId());
-    }
-    @Test
     public void addAnimal_getName(){
         Animal animal=setUpNewAnimal();
         assertEquals("Tiger",animal.getName());
@@ -55,10 +49,8 @@ public class AnimalTest{
     @Test
     public void equals_returnsTrueIfFirstAnimalAndSecondAnimalAreSame_true() {
         Animal firstAnimal = setUpNewAnimal();
-        firstAnimal.save();
         Animal anotherAnimal = setUpNewAnimal();
-        anotherAnimal.save();
-        assertTrue(firstAnimal.equals(anotherAnimal));
+        assertEquals(true,firstAnimal.equals(anotherAnimal));
     }
     @Test
     public void all_returnsAllInstancesOfAnimal_true() {
@@ -86,20 +78,13 @@ public class AnimalTest{
         secondAnimal.save();
         assertEquals(Animal.find(secondAnimal.getId()), secondAnimal);
     }
-//    @Test
-//    public void save_savesAnimalIdIntoDB_true() {
-//        Animal testAnimal = setUpNewAnimal();
-//        testAnimal.save();
-//        Sighting testSighting = setUpNewSighting();
-//        testSighting.saveSighting();
-//        Sighting savedSighting = Sighting.find(testSighting.getId());
-//        assertEquals(savedSighting.getAnimal_id(), testAnimal.getId());
-//    }
+
     @Test
     public void animal_instantiatesWithType_(){
         Animal animal = setUpAnotherAnimal();
         assertEquals(animal.getType(),(Animal.ANIMAL_TYPE));
     }
+
 
 
 }

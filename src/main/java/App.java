@@ -30,7 +30,7 @@ public class App {
         },new HandlebarsTemplateEngine());
 
         get("/animals",(request, response) -> {
-//            model.put("sightings", Sighting.getAll().size());
+            model.put("sightings", Sighting.getAll().size());
             model.put("animals",Animal.all());
             return new ModelAndView(model,"index.hbs");
         },new HandlebarsTemplateEngine());
@@ -43,7 +43,6 @@ public class App {
             String animalName = request.queryParams("name");
             String animalSighting = request.queryParams("sighting");
             String animalRanger = request.queryParams("ranger_name");
-//            int animalId = Integer.parseInt(request.queryParams("animalId"));
             Animal animal = new Animal(animalName);
             animal.save();
             Sighting sighting = new Sighting(animalSighting,animalRanger,1);
@@ -51,9 +50,9 @@ public class App {
             model.put("name",animalName);
             model.put("sighting",animalSighting);
             model.put("ranger_name",animalRanger);
-            return new ModelAndView(model,"index.hbs");
-//                response.redirect("/animals");
-//                return null;
+//            return new ModelAndView(model,"index.hbs");
+                response.redirect("/animals");
+                return null;
         },new HandlebarsTemplateEngine());
 
         }
