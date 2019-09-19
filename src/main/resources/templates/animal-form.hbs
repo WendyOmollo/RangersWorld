@@ -10,6 +10,7 @@
                         </div>
                         <div class="md-form w-50">
                             <select id="location" name="location" type="text" length="5" class="form-control">
+                                <option selected disabled>Location</option>
                                 <option value="river">River Bank</option>
                                 <option value="pond">At the pond</option>
                                 <option value="quicksand">At the quick sands</option>
@@ -35,14 +36,29 @@
                         </div>
                         <div class="md-form w-50">
                             <select id="name" name="name" type="text-white" length="5" class="form-control" placeholder="Sighting">
-                                <option value="1">River Bank</option>
-                                <option value="">At the pond</option>
-                                <option value="">At the quick sands</option>
-                                <option value="">At the clearing</option>
-                                <option value="">At the waterfall</option>
+                                <option selected disabled>Location</option>
+                                <option value="river">River Bank</option>
+                                <option value="pond">At the pond</option>
+                                <option value="quicksand">At the quick sands</option>
+                                <option value="clearing">At the clearing</option>
+                                <option value="waterfall">At the waterfall</option>
                             </select>
                         </div>
                         <div class="md-form w-50">
+                            <select id="health" name="health" type="text-white" length="5" class="form-control" placeholder="Sighting">
+                                <option selected disabled>Health</option>
+                                <option value="ANIMAL_OKAY">Okay</option>
+                                <option value="ANIMAL_ILL">Ill</option>
+                            </select>
+                        </div>
+                        <div class="md-form w-50">
+                            <select id="age" name="age" type="text-white" length="5" class="form-control">
+                                <option selected disabled>Age</option>
+                                <option value="ANIMAL_NEWBORN">Newborn</option>
+                                <option value="ANIMAL_YOUNG">Young</option>
+                                <option value="ANIMAL_ADULT">Adult</option>
+                            </select>
+                        </div>
                         <button type="submit" class="btn btn-warning" >Go!</button>
                     </form>
 
