@@ -81,7 +81,7 @@ Wendy Omollo
 * Spark
 * PostgreSQL
 
-##License
+## License
 MIT License
 
 Copyright (c) 2019 Wendy Omollo
