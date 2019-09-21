@@ -17,11 +17,19 @@ import static spark.Spark.*;
 
 public class App {
 
-    public static void main(String[] args) {
+    static int getHerokuAssignedPort() {
+        ProcessBuilder processBuilder = new ProcessBuilder();
+        if (processBuilder.environment().get("PORT") != null) {
+            return Integer.parseInt(processBuilder.environment().get("PORT"));
+        }
+        return 4567;
+    }
 
+    public static void main(String[] args) {
         staticFileLocation("/public");
-        String connectionString = "jdbc:postgresql://localhost:5432/animal_wild";
-        Sql2o sql2o = new Sql2o(connectionString, "moringa", "hyperloop");
+        port(getHerokuAssignedPort());
+        String connectionString = "jdbc:postgresql://mjitiwcupfliax:98e65b8eda766e5d268411e9f950e0eda8f1749467da91c60fc90f0396ab7b5d@ec2-107-21-120-104.compute-1.amazonaws.com:5432/dm6c18onevhrn";
+        Sql2o sql2o = new Sql2o(connectionString, "mjitiwcupfliax", "98e65b8eda766e5d268411e9f950e0eda8f1749467da91c60fc90f0396ab7b5d");
         Map<String, Object> model = new HashMap<>();
 
 

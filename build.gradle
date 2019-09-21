@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'application'
+    id "com.heroku.sdk.heroku-gradle" version "1.0.4"
 }
 
 group 'com.moringaschool.Animal'
@@ -9,7 +10,7 @@ version '1.0-SNAPSHOT'
 sourceCompatibility = 1.8
 
 repositories {
-    mavenCentral()
+    jcenter()
 }
 
 dependencies {
@@ -21,4 +22,11 @@ dependencies {
     compile group: 'org.postgresql', name: 'postgresql', version: '9.4-1201-jdbc41'
 }
 
-task stage(dependsOn: ['clean', 'installApp'])
+task stage(dependsOn: ['clean', 'installDist'])
+
+applicationName = "Animal"
+mainClassName = 'App'
+
+heroku{
+    appName = "animal-wild-001"
+}
