@@ -8,7 +8,7 @@ import java.util.Objects;
 
 import static models.DB.sql2o;
 
-public class EndangeredAnimal extends Animal {
+public class endangeredanimal extends animal {
         private String health;
         private String age;
         private int id;
@@ -22,7 +22,7 @@ public class EndangeredAnimal extends Animal {
 
 
 
-    public EndangeredAnimal( String animalName,String health,String age,String ANIMAL_TYPE) {
+    public endangeredanimal(String animalName, String health, String age, String ANIMAL_TYPE) {
         super(animalName);
         this.animalName = getName();
         this.health = health;
@@ -93,7 +93,7 @@ public class EndangeredAnimal extends Animal {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        EndangeredAnimal animal = (EndangeredAnimal) o;
+        endangeredanimal animal = (endangeredanimal) o;
         return (this.animalName.equals(animal.animalName));
     }
 
@@ -113,18 +113,18 @@ public class EndangeredAnimal extends Animal {
                     .getKey();
         }
     }
-    public static List<EndangeredAnimal> allEndangered() {
+    public static List<endangeredanimal> allEndangered() {
         String sql = "SELECT * FROM endangered_animals";
         try(Connection con = DB.sql2o.open()) {
-            return con.createQuery(sql).executeAndFetch(EndangeredAnimal.class);
+            return con.createQuery(sql).executeAndFetch(endangeredanimal.class);
         }
     }
-    public static EndangeredAnimal find(int id) {
+    public static endangeredanimal find(int id) {
         try(Connection con = DB.sql2o.open()) {
             String sql = "SELECT * FROM endangered_animals where id=:id";
-            EndangeredAnimal animal = con.createQuery(sql)
+            endangeredanimal animal = con.createQuery(sql)
                     .addParameter("id", id)
-                    .executeAndFetchFirst(EndangeredAnimal.class);
+                    .executeAndFetchFirst(endangeredanimal.class);
                         return animal;
         }
     }

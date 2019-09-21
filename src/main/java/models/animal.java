@@ -7,7 +7,7 @@ import java.util.Objects;
 
 import static models.DB.sql2o;
 
-public  class Animal {
+public  class animal {
 
     public int id;
     public String animalName;
@@ -15,7 +15,7 @@ public  class Animal {
 
     public static final String ANIMAL_TYPE ="thriving";
 
-    public Animal( String animalName){
+    public animal(String animalName){
         this.animalName = animalName;
         this.type = ANIMAL_TYPE;
         }
@@ -32,7 +32,7 @@ public  class Animal {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Animal animal = (Animal) o;
+        animal animal = (models.animal) o;
         return getId() == animal.getId() &&
                 Objects.equals(getName(), animal.getName());
     }
@@ -78,28 +78,28 @@ public  class Animal {
                     .getKey();
             }
         }
-    public static List<Animal> all() {
+    public static List<animal> all() {
         String sql = "SELECT * FROM animals";
         try(Connection con = DB.sql2o.open()) {
-            return con.createQuery(sql).executeAndFetch(Animal.class);
+            return con.createQuery(sql).executeAndFetch(animal.class);
         }
     }
 
-    public static Animal find(int id) {
+    public static animal find(int id) {
         try(Connection con = DB.sql2o.open()) {
             String sql = "SELECT * FROM animals where id=:id";
-            Animal animal = con.createQuery(sql)
+            animal animal = con.createQuery(sql)
                     .addParameter("id", id)
-                    .executeAndFetchFirst(Animal.class);
+                    .executeAndFetchFirst(models.animal.class);
             return animal;
             }
         }
     public void deleteById(int id) {
         try(Connection con = sql2o.open()) {
             String sql = "DELETE * FROM animals where id=:id";
-            Animal animal = con.createQuery(sql)
+            animal animal = con.createQuery(sql)
                     .addParameter("id", id)
-                    .executeAndFetchFirst(Animal.class);
+                    .executeAndFetchFirst(models.animal.class);
         }catch (Sql2oException ex){
             System.out.println(ex);
         }

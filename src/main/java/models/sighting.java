@@ -8,7 +8,7 @@ import java.util.Objects;
 
 import static models.DB.sql2o;
 
-public class Sighting  {
+public class sighting {
 
 
     private int id;
@@ -17,7 +17,7 @@ public class Sighting  {
     private  int animal_id;
     private int endangered_id;
 
-    public Sighting(String location,String ranger_name){
+    public sighting(String location, String ranger_name){
         this.location = location;
         this.ranger_name = ranger_name;
         this.animal_id = animal_id;
@@ -67,7 +67,7 @@ public class Sighting  {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Sighting sighting = (Sighting) o;
+        sighting sighting = (models.sighting) o;
         return getId() == sighting.getId() &&
                 getAnimal_id() == sighting.getAnimal_id() &&
                 Objects.equals(getLocation(), sighting.getLocation()) &&
@@ -80,25 +80,25 @@ public class Sighting  {
     }
 
 
-    public static List<Sighting> getAll() {
+    public static List<sighting> getAll() {
         try(Connection con = sql2o.open()){
             return con.createQuery("SELECT * FROM sightings") //raw sql
-                    .executeAndFetch(Sighting.class); //fetch a list
+                    .executeAndFetch(sighting.class); //fetch a list
         }
 
     }
 
-    public static List<Animal> getAnimals() {
+    public static List<animal> getAnimals() {
         String sql = "SELECT * FROM animals";
         try(Connection con = sql2o.open()) {
-            return con.createQuery(sql).executeAndFetch(Animal.class);
+            return con.createQuery(sql).executeAndFetch(animal.class);
         }
     }
 
-    public static List<EndangeredAnimal> allEndangered() {
+    public static List<endangeredanimal> allEndangered() {
         String sql = "SELECT * FROM endangered_animals";
         try(Connection con = sql2o.open()) {
-            return con.createQuery(sql).executeAndFetch(EndangeredAnimal.class);
+            return con.createQuery(sql).executeAndFetch(endangeredanimal.class);
         }
     }
 
@@ -117,22 +117,22 @@ public class Sighting  {
     }
 
 
-    public static Sighting findById(int id) {
+    public static sighting findById(int id) {
         try(Connection con = sql2o.open()) {
             String sql = "SELECT * FROM sightings where id=:id";
-            Sighting sighting = con.createQuery(sql)
+            sighting sighting = con.createQuery(sql)
                     .addParameter("id", id)
-                    .executeAndFetchFirst(Sighting.class);
+                    .executeAndFetchFirst(models.sighting.class);
             return sighting;
         }
 
     }
-    public static Sighting find(int id) {
+    public static sighting find(int id) {
         try (Connection con = sql2o.open()) {
             String sql = "SELECT * FROM sightings where id=:id";
-            Sighting sighting = con.createQuery(sql)
+            sighting sighting = con.createQuery(sql)
                     .addParameter("id", id)
-                    .executeAndFetchFirst(Sighting.class);
+                    .executeAndFetchFirst(models.sighting.class);
             return sighting;
         }
 
@@ -141,9 +141,9 @@ public class Sighting  {
     public void deleteById(int id) {
         try(Connection con = sql2o.open()) {
             String sql = "DELETE * FROM sightings where id=:id";
-            Sighting sighting = con.createQuery(sql)
+            sighting sighting = con.createQuery(sql)
                     .addParameter("id", id)
-                    .executeAndFetchFirst(Sighting.class);
+                    .executeAndFetchFirst(models.sighting.class);
         }catch (Sql2oException ex){
             System.out.println(ex);
      }

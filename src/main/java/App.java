@@ -3,10 +3,7 @@
 
 import models.*;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.sql2o.Sql2o;
@@ -17,7 +14,7 @@ import static spark.Spark.*;
 
 public class App {
 
-    static int getHerokuAssignedPort() {
+    public static int getHerokuAssignedPort() {
         ProcessBuilder processBuilder = new ProcessBuilder();
         if (processBuilder.environment().get("PORT") != null) {
             return Integer.parseInt(processBuilder.environment().get("PORT"));
@@ -38,9 +35,9 @@ public class App {
         },new HandlebarsTemplateEngine());
 
         get("/animals",(request, response) -> {
-            model.put("sightings", Sighting.getAll().size());
-            model.put("animals",Animal.all());
-            model.put("endangered",EndangeredAnimal.allEndangered());
+            model.put("sightings", sighting.getAll().size());
+            model.put("animals", animal.all());
+            model.put("endangered", endangeredanimal.allEndangered());
             return new ModelAndView(model,"index.hbs");
         },new HandlebarsTemplateEngine());
 
@@ -52,9 +49,9 @@ public class App {
             String animalName = request.queryParams("name");
             String animalLocation = request.queryParams("sighting");
             String animalRanger = request.queryParams("ranger_name");
-            Animal animal = new Animal(animalName);
+            animal animal = new animal(animalName);
             animal.save();
-            Sighting sighting = new Sighting(animalLocation,animalRanger);
+            sighting sighting = new sighting(animalLocation,animalRanger);
             sighting.add();
             model.put("name",animalName);
             model.put("sighting",animalLocation);
@@ -69,9 +66,9 @@ public class App {
             String endangeredAnimalHealth = request.queryParams("health");
             String endangeredAnimalAge = request.queryParams("age");
             String endangeredAnimalRanger = request.queryParams("ranger_name");
-            EndangeredAnimal endangeredAnimal = new EndangeredAnimal(endangeredAnimalName,endangeredAnimalHealth,endangeredAnimalAge,"Endangered");
+            endangeredanimal endangeredAnimal = new endangeredanimal(endangeredAnimalName,endangeredAnimalHealth,endangeredAnimalAge,"Endangered");
             endangeredAnimal.save();
-            Sighting sighting = new Sighting(endangeredAnimalLocation,endangeredAnimalRanger);
+            sighting sighting = new sighting(endangeredAnimalLocation,endangeredAnimalRanger);
             sighting.add();
             model.put("name",endangeredAnimalName);
             model.put("location",endangeredAnimalLocation);
