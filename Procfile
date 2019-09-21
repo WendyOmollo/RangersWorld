@@ -1,1 +1,1 @@
-web:.build/install/Animal/bin/Animal
+web:./build/install/animal/bin/animal
