@@ -32,6 +32,7 @@ public class App {
         get("/animals",(request, response) -> {
             model.put("sightings", Sighting.getAll().size());
             model.put("animals",Animal.all());
+            model.put("endangered",EndangeredAnimal.allEndangered());
             return new ModelAndView(model,"index.hbs");
         },new HandlebarsTemplateEngine());
 
@@ -41,18 +42,36 @@ public class App {
 
         post("/form",(request, response) -> {
             String animalName = request.queryParams("name");
-            String animalSighting = request.queryParams("sighting");
+            String animalLocation = request.queryParams("sighting");
             String animalRanger = request.queryParams("ranger_name");
             Animal animal = new Animal(animalName);
             animal.save();
-            Sighting sighting = new Sighting(animalSighting,animalRanger,1);
+            Sighting sighting = new Sighting(animalLocation,animalRanger);
             sighting.add();
             model.put("name",animalName);
-            model.put("sighting",animalSighting);
+            model.put("sighting",animalLocation);
             model.put("ranger_name",animalRanger);
-//            return new ModelAndView(model,"index.hbs");
                 response.redirect("/animals");
                 return null;
+        },new HandlebarsTemplateEngine());
+
+        post("/form",(request, response) -> {
+            String endangeredAnimalName = request.queryParams("name");
+            String endangeredAnimalLocation = request.queryParams("location");
+            String endangeredAnimalHealth = request.queryParams("health");
+            String endangeredAnimalAge = request.queryParams("age");
+            String endangeredAnimalRanger = request.queryParams("ranger_name");
+            EndangeredAnimal endangeredAnimal = new EndangeredAnimal(endangeredAnimalName,endangeredAnimalHealth,endangeredAnimalAge,"Endangered");
+            endangeredAnimal.save();
+            Sighting sighting = new Sighting(endangeredAnimalLocation,endangeredAnimalRanger);
+            sighting.add();
+            model.put("name",endangeredAnimalName);
+            model.put("location",endangeredAnimalLocation);
+            model.put("health",endangeredAnimalHealth);
+            model.put("age",endangeredAnimalAge);
+            model.put("ranger_name",endangeredAnimalRanger);
+            response.redirect("/animals");
+            return null;
         },new HandlebarsTemplateEngine());
 
         }

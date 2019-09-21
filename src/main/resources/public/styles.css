@@ -21,10 +21,18 @@ text-align:center;
 padding-top:90px;
 font-weight:900;
 font-size:65px;
+color:white;
 }
 #lovely{
 color:white;
 font-weight:900;
+}
+.overlay2{
+background-color:black;
+opacity:0.75;
+height:100%;
+z-index:1;
+background-position:center;
 }
 
 

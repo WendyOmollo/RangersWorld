@@ -29,13 +29,13 @@
                 <div class="col-md-6">
                     <div class="container">
                     <h4 class="text-white">Add endangered animal</h4>
-                    <form>
+                    <form action="/form" method="POST">
                         <div class="md-form w-50">
                             <input id="name" name="name" type="text-white" length="5" class="form-control" placeholder="Name">
                             <label for="name"class="text-white" >Name</label>
                         </div>
                         <div class="md-form w-50">
-                            <select id="name" name="name" type="text-white" length="5" class="form-control" placeholder="Sighting">
+                            <select id="name" name="location" type="text-white" length="5" class="form-control" placeholder="Sighting">
                                 <option selected disabled>Location</option>
                                 <option value="river">River Bank</option>
                                 <option value="pond">At the pond</option>
@@ -58,6 +58,9 @@
                                 <option value="ANIMAL_YOUNG">Young</option>
                                 <option value="ANIMAL_ADULT">Adult</option>
                             </select>
+                        </div>
+                        <div class="md-form w-50">
+                            <input id="ranger_name" name="ranger_name" type="text-white" length="5" class="form-control" placeholder="Ranger">
                         </div>
                         <button type="submit" class="btn btn-warning" >Go!</button>
                     </form>

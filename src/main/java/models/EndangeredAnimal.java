@@ -22,9 +22,9 @@ public class EndangeredAnimal extends Animal {
 
 
 
-    public EndangeredAnimal( String animalName,String health,String age,int id) {
+    public EndangeredAnimal( String animalName,String health,String age,String ANIMAL_TYPE) {
         super(animalName);
-        this.animalName = animalName;
+        this.animalName = getName();
         this.health = health;
         this.age = age;
         this.type = ANIMAL_TYPE;

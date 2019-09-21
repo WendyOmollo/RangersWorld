@@ -33,22 +33,22 @@ public class SightingTest {
 
 
     public Sighting setUpNewSighting(){
-        return new Sighting("At the river bank","Lulu Hassan",1);
+        return new Sighting("At the river bank","Lulu Hassan");
     }
     public Sighting setUpAnotherSighting(){
-        return new Sighting("At the pond","Maria Kalu",2);
+        return new Sighting("At the pond","Maria Kalu");
     }
     public Animal setUpNewAnimal(){
         return new Animal("Tiger");
     }
     public EndangeredAnimal setUpNewEndangered(){
-        return new EndangeredAnimal("Rhino","Okay","Young",1);
+        return new EndangeredAnimal("Rhino","Okay","Young");
     }
 
     public Animal setUpAnotherAnimal(){return new Animal ("Lion");}
 
     public EndangeredAnimal setUpAnotherEndangered(){
-        return new EndangeredAnimal("Koala","Okay","Adult",2);
+        return new EndangeredAnimal("Koala","Okay","Adult");
     }
 
     @Test

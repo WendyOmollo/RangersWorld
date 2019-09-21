@@ -17,7 +17,7 @@ public class Sighting  {
     private  int animal_id;
     private int endangered_id;
 
-    public Sighting(String location,String ranger_name,int animal_id){
+    public Sighting(String location,String ranger_name){
         this.location = location;
         this.ranger_name = ranger_name;
         this.animal_id = animal_id;
