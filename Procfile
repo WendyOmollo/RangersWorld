@@ -1,1 +1,1 @@
-web:./build/install/animal/bin/animal
+web:./build/install/wild/bin/wild

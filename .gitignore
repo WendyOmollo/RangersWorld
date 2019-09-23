@@ -40,10 +40,11 @@ build/
 out/
 out
 .gradle
-gradle
+!gradle
 gradlew.bat
 gradlew
 settings.gradle
+!gradle-wrapper.jar
 
 # IntelliJ #
 ############
