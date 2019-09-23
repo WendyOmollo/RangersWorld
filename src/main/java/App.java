@@ -34,9 +34,9 @@ public class App {
         },new HandlebarsTemplateEngine());
 
         get("/animals",(request, response) -> {
-            model.put("sightings", sighting.getAll().size());
-            model.put("animals", animal.all());
-            model.put("endangered", endangeredanimal.allEndangered());
+            model.put("sightings", Sighting.getAll().size());
+            model.put("animals", Animal.all());
+            model.put("endangered", EndangeredAnimal.allEndangered());
             return new ModelAndView(model,"index.hbs");
         },new HandlebarsTemplateEngine());
 
@@ -48,9 +48,9 @@ public class App {
             String animalName = request.queryParams("name");
             String animalLocation = request.queryParams("sighting");
             String animalRanger = request.queryParams("ranger_name");
-            animal animal = new animal(animalName);
+            Animal animal = new Animal(animalName);
             animal.save();
-            sighting sighting = new sighting(animalLocation,animalRanger);
+            Sighting sighting = new Sighting(animalLocation,animalRanger);
             sighting.add();
             model.put("name",animalName);
             model.put("sighting",animalLocation);
@@ -65,9 +65,9 @@ public class App {
             String endangeredAnimalHealth = request.queryParams("health");
             String endangeredAnimalAge = request.queryParams("age");
             String endangeredAnimalRanger = request.queryParams("ranger_name");
-            endangeredanimal endangeredAnimal = new endangeredanimal(endangeredAnimalName,endangeredAnimalHealth,endangeredAnimalAge,"Endangered");
+            EndangeredAnimal endangeredAnimal = new EndangeredAnimal(endangeredAnimalName,endangeredAnimalHealth,endangeredAnimalAge,"Endangered");
             endangeredAnimal.save();
-            sighting sighting = new sighting(endangeredAnimalLocation,endangeredAnimalRanger);
+            Sighting sighting = new Sighting(endangeredAnimalLocation,endangeredAnimalRanger);
             sighting.add();
             model.put("name",endangeredAnimalName);
             model.put("location",endangeredAnimalLocation);

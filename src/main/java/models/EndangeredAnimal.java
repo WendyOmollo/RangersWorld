@@ -8,7 +8,7 @@ import java.util.Objects;
 
 import static models.DB.sql2o;
 
-public class endangeredanimal extends animal {
+public class EndangeredAnimal extends Animal {
         private String health;
         private String age;
         private int id;
@@ -22,7 +22,7 @@ public class endangeredanimal extends animal {
 
 
 
-    public endangeredanimal(String animalName, String health, String age, String ANIMAL_TYPE) {
+    public EndangeredAnimal(String animalName, String health, String age, String ANIMAL_TYPE) {
         super(animalName);
         this.animalName = getName();
         this.health = health;
@@ -93,7 +93,7 @@ public class endangeredanimal extends animal {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        endangeredanimal animal = (endangeredanimal) o;
+        EndangeredAnimal animal = (EndangeredAnimal) o;
         return (this.animalName.equals(animal.animalName));
     }
 
@@ -113,18 +113,18 @@ public class endangeredanimal extends animal {
                     .getKey();
         }
     }
-    public static List<endangeredanimal> allEndangered() {
+    public static List<EndangeredAnimal> allEndangered() {
         String sql = "SELECT * FROM endangered_animals";
         try(Connection con = DB.sql2o.open()) {
-            return con.createQuery(sql).executeAndFetch(endangeredanimal.class);
+            return con.createQuery(sql).executeAndFetch(EndangeredAnimal.class);
         }
     }
-    public static endangeredanimal find(int id) {
+    public static EndangeredAnimal find(int id) {
         try(Connection con = DB.sql2o.open()) {
             String sql = "SELECT * FROM endangered_animals where id=:id";
-            endangeredanimal animal = con.createQuery(sql)
+            EndangeredAnimal animal = con.createQuery(sql)
                     .addParameter("id", id)
-                    .executeAndFetchFirst(endangeredanimal.class);
+                    .executeAndFetchFirst(EndangeredAnimal.class);
                         return animal;
         }
     }
